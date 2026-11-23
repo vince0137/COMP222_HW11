@@ -7,16 +7,6 @@ import java.util.ArrayList;
 public class Main {
 
     /**
-     * A search algorithm for the ArrayList that finds the nearest neighbor of the given coordinates
-     * @param arrayList The ArrayList containing the point
-     * @param point The point being operated on
-     * @return the point closest to the point given
-     */
-    private double[] arrayListSearch(ArrayList<double[][]> arrayList, double[] point) {
-        return new double[]{-1.0};
-    }
-
-    /**
      * Main method to run the tests
      */
     public static void main(String[] args) {
