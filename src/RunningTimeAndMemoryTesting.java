@@ -1,5 +1,6 @@
 import smile.neighbor.KDTree;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -51,10 +52,12 @@ public class RunningTimeAndMemoryTesting {
      * @param numQueries The number of queries being run
      * @return The running time of the operations in microseconds
      */
-    public static long RunningTimeTestKDTree(double[][] points, int numPoints, Integer[] labels, int numQueries) {
+    public static long RunningTimeTestKDTree(double[][] points, int numPoints, int[] labels, int numQueries) {
         
         Random rand = new Random();
-        KDTree<Integer> kdTree = new KDTree<>(points, labels);
+        KDTree<Integer> kdTree = new KDTree<>(points, Arrays.stream(labels)
+                .boxed()
+                .toArray(Integer[]::new));
 
         long startTime = System.nanoTime();
 

@@ -19,7 +19,7 @@ public class Main {
         for (int numPoints = 5_000; numPoints <= 50_000_000; numPoints *= 10) {
 
             double[][] points = new double[numPoints][];
-            Integer[] labels = new Integer[numPoints];
+            int[] labels = new int[numPoints];
             Random rand = new Random();
             
             for (int i = 0; i < numPoints; i++) {
