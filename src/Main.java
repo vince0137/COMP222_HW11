@@ -16,7 +16,7 @@ public class Main {
         int range = 1_000_000_000; // How far away a point can be in each dimension
         int numQueries = 10_000; // The number of operations performed in a test
 
-        for (int numPoints = 5_000; numPoints <= 50_000_000; numPoints *= 10) {
+        for (int numPoints = 2_000; numPoints <= 20_000_000; numPoints *= 10) {
 
             double[][] points = new double[numPoints][];
             int[] labels = new int[numPoints];
