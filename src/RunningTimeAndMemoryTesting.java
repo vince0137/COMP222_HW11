@@ -96,27 +96,49 @@ public class RunningTimeAndMemoryTesting {
     /**
      * Tests the memory usage required to create a K-D tree with a given number of points within a range.
      * @param points The array of points in the K-D tree
-     * @param range How far away a point can be in each dimension
-     * @param numPoints The number of points to be stored
-     * @param k The number of dimensions
+     * @param labels the array of labels for the points in the KD tree
      * @return The total memory used
      */
-    public static long MemoryTestKDTree(double[][] points, int numPoints, int range, int k) {
+    public static long MemoryTestKDTree(double[][] points, int[] labels) throws InterruptedException {
+
+        MemoryMonitor memoryMonitor = new MemoryMonitor(100);
+        Thread monitorThread = new Thread(memoryMonitor, "memory-monitor");
+        monitorThread.setDaemon(true);
+        monitorThread.start();
+
+        KDTree<Integer> kdTree = new KDTree<>(points, Arrays.stream(labels)
+                .boxed()
+                .toArray(Integer[]::new));
         
+        Thread.sleep(1000);
+        memoryMonitor.stop();
+        monitorThread.join();
+
+        long maxMemory = (memoryMonitor.getMaxMemoryUsed() / 1024 / 1024); // in MB
         
-        
-        return -1;
+        return maxMemory;
     }
 
     /**
      * Tests the memory usage required to create an ArrayList with a given number of points within a range.
      * @param points The array of points in the ArrayList
-     * @param numPoints The number of points to be stored
-     * @param range How far away a point can be in each dimension
      * @return The total memory used
      */
-    public static long MemoryTestArray(double[][] points, int numPoints, int range) {
-        return -1;
+    public static long MemoryTestArray(double[][] points) throws InterruptedException {
+
+        MemoryMonitor memoryMonitor = new MemoryMonitor(100);
+        Thread monitorThread = new Thread(memoryMonitor, "memory-monitor");
+        monitorThread.setDaemon(true);
+        monitorThread.start();
+
+        ArrayList<double[]> arrayList = new ArrayList<>(Arrays.asList(points));
+
+        Thread.sleep(1000);
+        memoryMonitor.stop();
+        monitorThread.join();
+
+        long maxMemory = (memoryMonitor.getMaxMemoryUsed() / 1024 / 1024); // in MB
+
+        return maxMemory;
     }
-    
 }
