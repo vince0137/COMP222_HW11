@@ -9,7 +9,7 @@ public class Main {
     /**
      * Main method to run the tests
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         
         int k = 2; // Number of dimensions of the tree. the 'k' in k-dimensional
         int range = 1_000_000_000; // How far away a point can be in each dimension
@@ -33,7 +33,9 @@ public class Main {
             long runningTimeOrMemory;
 
 //            runningTimeOrMemory = RunningTimeAndMemoryTesting.RunningTimeTestKDTree(points, numPoints, labels, numQueries);
-            runningTimeOrMemory = RunningTimeAndMemoryTesting.RunningTimeTestArray(points, numPoints, numQueries);
+//            runningTimeOrMemory = RunningTimeAndMemoryTesting.RunningTimeTestArray(points, numPoints, numQueries);
+//            runningTimeOrMemory = RunningTimeAndMemoryTesting.MemoryTestKDTree(points, labels);
+            runningTimeOrMemory = RunningTimeAndMemoryTesting.MemoryTestArray(points);
 
             
             System.out.println("Uniformly distributed numbers: " + runningTimeOrMemory + " ms/MB");
@@ -45,7 +47,9 @@ public class Main {
             }
 
 //            runningTimeOrMemory = RunningTimeAndMemoryTesting.RunningTimeTestKDTree(points, numPoints, labels, numQueries);
-            runningTimeOrMemory = RunningTimeAndMemoryTesting.RunningTimeTestArray(points, numPoints, numQueries);
+//            runningTimeOrMemory = RunningTimeAndMemoryTesting.RunningTimeTestArray(points, numPoints, numQueries);
+//            runningTimeOrMemory = RunningTimeAndMemoryTesting.MemoryTestKDTree(points, labels);
+            runningTimeOrMemory = RunningTimeAndMemoryTesting.MemoryTestArray(points);
             
             System.out.println("Gaussian distributed numbers: " + runningTimeOrMemory + " ms/MB\n");
         }
