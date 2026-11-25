@@ -59,7 +59,7 @@ public class RunningTimeAndMemoryTesting {
         long startTime = System.nanoTime();
 
         for (int i = 0; i < numQueries; i++) {
-            kdTree.nearest(points[rand.nextInt(numPoints + 1)]);
+            kdTree.nearest(points[rand.nextInt(numPoints)]);
         }
 
         long elapsedMicros = (System.nanoTime() - startTime) / 1_000;

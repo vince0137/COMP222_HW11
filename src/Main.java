@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Main class that runs the testing methods for different numbers of points
@@ -11,15 +12,39 @@ public class Main {
      */
     public static void main(String[] args) {
         
-//        int k = 2; // Number of dimensions of the tree. the 'k' in k-dimensional
-//        int range = 1_000_000_000; // How far away a point can be in each dimension
-//        
-//        for (int numPoints = 10_000; numPoints <= 100_000_000; numPoints *= 10) {
-//
-//            double[][] points = new double[numPoints][k];
-//            
-//            
-//            
-//        }
+        int k = 2; // Number of dimensions of the tree. the 'k' in k-dimensional
+        int range = 1_000_000_000; // How far away a point can be in each dimension
+        int numQueries = 10_000; // The number of operations performed in a test
+
+        for (int numPoints = 5_000; numPoints <= 50_000_000; numPoints *= 10) {
+
+            double[][] points = new double[numPoints][];
+            Integer[] labels = new Integer[numPoints];
+            Random rand = new Random();
+            
+            for (int i = 0; i < numPoints; i++) {
+                points[i] = new double[]{
+                        rand.nextInt(range + 1),
+                        rand.nextInt(range + 1)
+                };
+                labels[i] = i;
+            }
+            
+            System.out.println(numPoints + " points: ");
+            long runningTime;
+
+            runningTime = RunningTimeAndMemoryTesting.RunningTimeTestKDTree(points, numPoints, labels, numQueries);
+
+            System.out.println("Uniformly distributed numbers: " + runningTime + " ms");
+
+            for (int i = 0; i < numPoints; i++) {
+                points[i][0] = rand.nextGaussian(range/2, 166_666_667);
+                points[i][1] = rand.nextGaussian(range/2, 166_666_667);
+            }
+
+            runningTime = RunningTimeAndMemoryTesting.RunningTimeTestKDTree(points, numPoints, labels, numQueries);
+
+            System.out.println("Gaussian distributed numbers: " + runningTime + " ms");
+        }
     }
 }
