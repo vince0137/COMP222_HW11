@@ -20,7 +20,7 @@ public class RunningTimeAndMemoryTesting {
      * @param target The point being operated on
      * @return the point closest to the point given
      */
-    private double[] arrayListNearest(ArrayList<double[]> points, double[] target) {
+    private static double[] arrayListNearest(ArrayList<double[]> points, double[] target) {
         if (points == null || points.isEmpty()) {
             return null;
         }
@@ -71,15 +71,26 @@ public class RunningTimeAndMemoryTesting {
     }
 
     /**
-     * Tests the running time to find the nearest neighbor of a point in an ArrayList using evenly random and Gaussian 
-     * clusters of numbers.
+     * Tests the running time to find the nearest neighbor of a point in an ArrayList
      * @param points The array of points in the ArrayList
      * @param numPoints The number of points to be stored
-     * @param range How far away a point can be in each dimension
-     * @return The running time of the operations
+     * @param numQueries The number of queries being run
+     * @return The running time of the operations in microseconds
      */
-    public static long[] RunningTimeTestArray(double[][] points, int numPoints, int range) {
-        return null;
+    public static long RunningTimeTestArray(double[][] points, int numPoints, int numQueries) {
+
+        Random rand = new Random();
+
+        ArrayList<double[]> arrayList = new ArrayList<>(Arrays.asList(points));
+
+        long startTime = System.nanoTime();
+
+        for (int i = 0; i < numQueries; i++) {
+            arrayListNearest(arrayList, points[rand.nextInt(numPoints)]);
+        }
+
+        long elapsedMicros = (System.nanoTime() - startTime) / 1_000;
+        return elapsedMicros;
     }
 
     /**
@@ -90,8 +101,11 @@ public class RunningTimeAndMemoryTesting {
      * @param k The number of dimensions
      * @return The total memory used
      */
-    public static long[] MemoryTestKDTree(double[][] points, int numPoints, int range, int k) {
-        return null;
+    public static long MemoryTestKDTree(double[][] points, int numPoints, int range, int k) {
+        
+        
+        
+        return -1;
     }
 
     /**
@@ -101,8 +115,8 @@ public class RunningTimeAndMemoryTesting {
      * @param range How far away a point can be in each dimension
      * @return The total memory used
      */
-    public static long[] MemoryTestArray(double[][] points, int numPoints, int range) {
-        return null;
+    public static long MemoryTestArray(double[][] points, int numPoints, int range) {
+        return -1;
     }
     
 }

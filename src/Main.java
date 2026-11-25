@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -31,20 +30,24 @@ public class Main {
             }
             
             System.out.println(numPoints + " points: ");
-            long runningTime;
+            long runningTimeOrMemory;
 
-            runningTime = RunningTimeAndMemoryTesting.RunningTimeTestKDTree(points, numPoints, labels, numQueries);
+//            runningTimeOrMemory = RunningTimeAndMemoryTesting.RunningTimeTestKDTree(points, numPoints, labels, numQueries);
+            runningTimeOrMemory = RunningTimeAndMemoryTesting.RunningTimeTestArray(points, numPoints, numQueries);
 
-            System.out.println("Uniformly distributed numbers: " + runningTime + " ms");
+            
+            System.out.println("Uniformly distributed numbers: " + runningTimeOrMemory + " ms/MB");
 
+            int stdDev = 166_666_667; // (range/2)/3, so 99.7% of the numbers are within range. 
             for (int i = 0; i < numPoints; i++) {
-                points[i][0] = rand.nextGaussian(range/2, 166_666_667);
-                points[i][1] = rand.nextGaussian(range/2, 166_666_667);
+                points[i][0] = rand.nextGaussian(range/2, stdDev);
+                points[i][1] = rand.nextGaussian(range/2, stdDev);
             }
 
-            runningTime = RunningTimeAndMemoryTesting.RunningTimeTestKDTree(points, numPoints, labels, numQueries);
-
-            System.out.println("Gaussian distributed numbers: " + runningTime + " ms");
+//            runningTimeOrMemory = RunningTimeAndMemoryTesting.RunningTimeTestKDTree(points, numPoints, labels, numQueries);
+            runningTimeOrMemory = RunningTimeAndMemoryTesting.RunningTimeTestArray(points, numPoints, numQueries);
+            
+            System.out.println("Gaussian distributed numbers: " + runningTimeOrMemory + " ms/MB\n");
         }
     }
 }
